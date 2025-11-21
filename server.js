@@ -3,12 +3,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-// Your existing routes
+// Existing routes
 const authRoutes = require('./routes/auth');
 const vaultRoutes = require('./routes/vault');
 
-// NEW — multi-vault system routes
-const vaultsRoutes = require('./routes/vaults');
+// ⭐ NEW — Shared Vault System (Option 2)
+const sharedVaultRoutes = require('./routes/sharedVault');
 
 const app = express();
 
@@ -20,8 +20,8 @@ app.use(express.json());
 
 // Register routes
 app.use('/api/auth', authRoutes);
-app.use('/api/vault', vaultRoutes);     // existing personal vault
-app.use('/api/vaults', vaultsRoutes);   // NEW multi-vault system
+app.use('/api/vault', vaultRoutes);          // your personal vault
+app.use('/api/shared', sharedVaultRoutes);   // ⭐ your shared vault system
 
 // Connect to MongoDB and start server
 mongoose.connect(process.env.MONGO_URI)
